@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <cstdlib>
 
 #include <algorithm>
 #include <cerrno>
