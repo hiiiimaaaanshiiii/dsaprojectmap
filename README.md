@@ -7,7 +7,7 @@ An interactive Delhi NCR route-planning web app with a C++20 routing engine. The
 - React + TypeScript + MapLibre user interface with map click, place selection, route objectives, route geometry, distance, ETA and maneuver display.
 - C++20 HTTP API with a directed adjacency-list road graph, OSM-ID-ready import format, A* and Dijkstra, binary min-heap frontier, Haversine heuristic, parent-vector route reconstruction and generated turn instructions.
 - `fastest` (edge travel-time) and `shortest` (edge-distance) route objectives.
-- A street-level Delhi NCR graph built from 982,995 OSM road nodes and 1,112,599 road segments. It covers the bounded Delhi NCR region used by the project.
+- A lightweight demo graph is included for quick setup. The full Delhi NCR graph is intentionally kept outside the Git repository because the source extract and generated graph are large local assets.
 - An OSM XML importer that converts a permitted bounded extract into the same production graph format. It retains drivable roads and one-way rules.
 
 ## Run locally
@@ -46,7 +46,7 @@ The final two commands should return the same optimal distance/duration. A* shou
 
 ## Graph format and fuller OSM coverage
 
-The server now loads `backend/data/delhi_ncr_graph.csv` unless `NAVIGATOR_GRAPH` is set. The small `delhi_demo_graph.csv` remains as a lightweight fallback. The format is deliberately simple:
+The server loads `backend/data/delhi_ncr_graph.csv` when present, then falls back to the small `delhi_demo_graph.csv`. The full graph is not bundled in this lightweight repository upload. The format is deliberately simple:
 
 ```text
 N|internal-id|latitude|longitude|display name
