@@ -1,24 +1,22 @@
 #include "routing.hpp"
-#include <cmath>
-#include <iostream>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <cstdlib>
-
 #include <algorithm>
+#include <arpa/inet.h>
 #include <cerrno>
 #include <charconv>
+#include <cctype>
 #include <csignal>
+#include <cmath>
 #include <cstdlib>
 #include <filesystem>
 #include <iomanip>
 #include <iostream>
 #include <map>
+#include <netinet/in.h>
 #include <optional>
 #include <sstream>
 #include <string>
+#include <sys/socket.h>
+#include <unistd.h>
 #include <vector>
 
 namespace {
@@ -29,8 +27,6 @@ using navigator::Objective;
 using navigator::RoadGraph;
 using navigator::Route;
 using navigator::Router;
-
-constexpr int kPort = 8080;
 
 std::string lowercase(std::string value) {
   std::transform(value.begin(), value.end(), value.begin(), [](unsigned char character) {
@@ -249,6 +245,14 @@ void handle_request(int client, const RoadGraph& graph, const Router& router) {
 
 int main(int argument_count, char* arguments[]) {
   std::signal(SIGPIPE, SIG_IGN);
+
+  // Render supplies PORT; use 8080 when running locally.
+  const char* port_env = std::getenv("PORT");
+  const int port = port_env ? std::atoi(port_env) : 8080;
+  if (port <= 0 || port > 65535) {
+    std::cerr << "Invalid PORT environment variable\\n";
+    return 1;
+  }
   RoadGraph graph;
   std::string graph_error;
   const std::string graph_path = locate_graph();
@@ -277,14 +281,14 @@ int main(int argument_count, char* arguments[]) {
   setsockopt(server, SOL_SOCKET, SO_REUSEADDR, &reuse_address, sizeof(reuse_address));
   sockaddr_in address{};
   address.sin_family = AF_INET;
-  address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-  address.sin_port = htons(kPort);
+  address.sin_addr.s_addr = htonl(INADDR_ANY);
+  address.sin_port = htons(static_cast<unsigned short>(port));
   if (bind(server, reinterpret_cast<sockaddr*>(&address), sizeof(address)) < 0 || listen(server, 16) < 0) {
     std::perror("bind/listen");
     close(server);
     return 1;
   }
-  std::cout << "Map Navigator API running on http://127.0.0.1:" << kPort << "\n"
+  std::cout << "Map Navigator API listening on 0.0.0.0:" << static_cast<unsigned short>(port) << "\n"
             << "Loaded " << graph.node_count() << " nodes and " << graph.edge_count() << " directed edges from "
             << graph_path << "\n";
   while (true) {
