@@ -1,0 +1,27 @@
+{
+  "name": "map-navigator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "api:build": "make -C backend",
+    "api": "./backend/bin/navigator_api",
+    "dev:full": "npm run api:build && (./backend/bin/navigator_api & api_pid=$!; trap 'kill $api_pid 2>/dev/null || true' EXIT INT TERM; vite)",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "lucide-react": "latest",
+    "maplibre-gl": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}
