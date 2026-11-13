@@ -1,0 +1,66 @@
+# Map Navigator starter graph. Coordinates are Delhi NCR landmarks; E rows are weighted by
+# great-circle distance at load time. B = bidirectional, F = forward-only.
+# N|id|latitude|longitude|display name
+N|0|28.612900|77.229500|India Gate
+N|1|28.625300|77.234600|Mandi House
+N|2|28.631500|77.216700|Connaught Place
+N|3|28.642000|77.219900|New Delhi Railway Station
+N|4|28.667500|77.228800|Kashmere Gate
+N|5|28.676900|77.225500|Civil Lines
+N|6|28.651000|77.190000|Karol Bagh
+N|7|28.643000|77.178400|Rajendra Place
+N|8|28.655200|77.170200|Patel Nagar
+N|9|28.567700|77.243200|Lajpat Nagar
+N|10|28.549500|77.251300|Nehru Place
+N|11|28.555300|77.242900|Greater Kailash
+N|12|28.549400|77.200100|Hauz Khas
+N|13|28.524500|77.206600|Saket
+N|14|28.567200|77.210000|AIIMS
+N|15|28.569400|77.193000|Safdarjung
+N|16|28.498200|77.089000|Cyber City
+N|17|28.459500|77.026600|Gurugram
+N|18|28.556200|77.100000|Indira Gandhi International Airport
+N|19|28.592100|77.046000|Dwarka
+N|20|28.570200|77.324000|Noida Sector 18
+N|21|28.612700|77.277300|Akshardham
+N|22|28.609500|77.295000|Mayur Vihar
+N|23|28.655900|77.241000|Old Delhi
+N|24|28.641700|77.239000|Delhi Gate
+N|25|28.583000|77.242500|Jangpura
+N|26|28.572400|77.259400|Ashram
+N|27|28.520000|77.150000|Vasant Kunj
+# E|from|to|road name|speed kph|direction
+E|0|1|Janpath|40|B
+E|1|2|Tolstoy Marg|35|B
+E|1|24|Bahadur Shah Zafar Marg|35|B
+E|24|23|Netaji Subhash Marg|30|B
+E|23|4|Lothian Road|30|B
+E|4|5|Alipur Road|35|B
+E|2|3|Chelmsford Road|30|B
+E|2|6|Pusa Road|40|B
+E|6|7|Shankar Road|35|B
+E|7|8|Patel Road|35|B
+E|0|14|Aurobindo Marg|40|B
+E|14|15|Ring Road|45|B
+E|15|12|Africa Avenue|35|B
+E|12|13|Aurobindo Marg|40|B
+E|13|27|Mehrauli Road|40|B
+E|27|18|Nelson Mandela Marg|45|B
+E|18|19|Dwarka Road|50|B
+E|19|16|NH 48|60|B
+E|16|17|NH 48|60|B
+E|0|25|Lodhi Road|40|B
+E|25|9|Mathura Road|40|B
+E|9|10|Outer Ring Road|40|B
+E|10|13|M B Road|35|B
+E|25|26|Mathura Road|40|B
+E|26|22|Noida Link Road|45|B
+E|22|21|Mayur Vihar Road|35|B
+E|21|24|Vikas Marg|40|B
+E|22|20|DND Flyway|55|B
+E|14|9|Lala Lajpat Rai Road|35|B
+E|15|6|Sardar Patel Marg|45|B
+E|6|2|Rani Jhansi Road|35|B
+E|3|4|Mahatma Gandhi Marg|30|B
+E|9|11|Lala Lajpat Rai Road|30|B
+E|11|10|Outer Ring Road|35|B
